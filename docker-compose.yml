@@ -1,0 +1,58 @@
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: chatapp
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - ./server/.env
+    environment:
+      MONGO_URI: mongodb://mongo:27017/chatapp
+      REDIS_URL: redis://redis:6379
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+      - redis
+    develop:
+      watch:
+        - action: sync
+          path: ./server/src
+          target: /app/src
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
+    develop:
+      watch:
+        - action: sync
+          path: ./client/src
+          target: /app/src
+
+volumes:
+  mongo_data:
+  redis_data:
