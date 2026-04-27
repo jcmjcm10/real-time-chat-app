@@ -6,9 +6,9 @@ const { Server } = require('socket.io');
 const cors = require('cors');
 
 const connectMongo = require('./config/mongo');
-const connectRedis = require('./config/redis');
+const { connectRedis } = require('./config/redis');
 
-// const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/auth');
 // const roomRoutes = require('./routes/rooms');
 // const messageRoutes = require('./routes/messages');
 
@@ -20,10 +20,10 @@ const io = new Server(httpServer, {
   cors: { origin: '*' }
 });
 
-// app.use(cors());
-// app.use(express.json());
+app.use(cors());
+app.use(express.json());
 
-// app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 // app.use('/api/rooms', roomRoutes);
 // app.use('/api/rooms', messageRoutes);
 

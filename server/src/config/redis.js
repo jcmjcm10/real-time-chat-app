@@ -17,4 +17,7 @@ function getRedis() {
     return client;
 }
 
-module.exports = { connectRedis, getRedis };
+module.exports = { 
+    connectRedis:connectRedis, 
+    getRedis:getRedis 
+};
