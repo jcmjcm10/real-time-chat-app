@@ -1,12 +1,12 @@
 // require('dotenv').config();
-
+console.log("INICIANDO PROGRAMA")
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 
-// const connectMongo = require('./config/mongo');
-// const connectRedis = require('./config/redis');
+const connectMongo = require('./config/mongo');
+const connectRedis = require('./config/redis');
 
 // const authRoutes = require('./routes/auth');
 // const roomRoutes = require('./routes/rooms');
@@ -32,8 +32,8 @@ const io = new Server(httpServer, {
 const PORT = process.env.PORT || 3000;
 
 async function start() {
-  // await connectMongo();
-  // await connectRedis();
+  await connectMongo();
+  await connectRedis();
   httpServer.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });

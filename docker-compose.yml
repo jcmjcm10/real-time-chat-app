@@ -4,6 +4,8 @@ services:
     restart: unless-stopped
     environment:
       MONGO_INITDB_DATABASE: chatapp
+      MONGO_INITDB_ROOT_USERNAME: chatapp
+      MONGO_INITDB_ROOT_PASSWORD: chatapp
     volumes:
       - mongo_data:/data/db
     ports:
