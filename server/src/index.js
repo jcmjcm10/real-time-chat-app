@@ -9,6 +9,7 @@ const connectMongo = require('./config/mongo');
 const { connectRedis } = require('./config/redis');
 
 const authRoutes = require('./routes/auth');
+const authJWT = require('./middleware/authJWT');
 // const roomRoutes = require('./routes/rooms');
 // const messageRoutes = require('./routes/messages');
 
@@ -24,7 +25,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
-// app.use('/api/rooms', roomRoutes);
+app.use('/api/rooms', authJWT); // falta roomRoutes
 // app.use('/api/rooms', messageRoutes);
 
 // registerSocketHandlers(io);
