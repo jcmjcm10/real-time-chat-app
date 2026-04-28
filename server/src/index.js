@@ -25,7 +25,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
-app.use('/api/rooms', authJWT); // falta roomRoutes
+app.use('/api/rooms', authJWT, roomRoutes);
 // app.use('/api/rooms', messageRoutes);
 
 // registerSocketHandlers(io);
