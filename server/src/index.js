@@ -8,12 +8,17 @@ const cors = require('cors');
 const connectMongo = require('./config/mongo');
 const { connectRedis } = require('./config/redis');
 
-const authRoutes = require('./routes/auth');
+
+// Middlewares
 const authJWT = require('./middleware/authJWT');
-// const roomRoutes = require('./routes/rooms');
+
+// Endpoints
+const authRoutes = require('./routes/auth');
+const roomRoutes = require('./routes/rooms');
 // const messageRoutes = require('./routes/messages');
 
-// const registerSocketHandlers = require('./socket');
+const registerSocketHandlers = require('./socket');
+
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -24,17 +29,19 @@ const io = new Server(httpServer, {
 app.use(cors());
 app.use(express.json());
 
+// Registrar los endpoinds
 app.use('/api/auth', authRoutes);
 app.use('/api/rooms', authJWT, roomRoutes);
 // app.use('/api/rooms', messageRoutes);
 
-// registerSocketHandlers(io);
+registerSocketHandlers(io);
 
 const PORT = process.env.PORT || 3000;
 
 async function start() {
   await connectMongo();
   await connectRedis();
+
   httpServer.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
