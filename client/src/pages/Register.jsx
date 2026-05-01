@@ -24,29 +24,37 @@ export default function Register() {
     return (
         <div>
             <h1>Registro</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Usuario"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Contraseña"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                {error && <p>{error}</p>}
-                <button type="submit">Registrarse</button>
-            </form>
-            <p>¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link></p>
+            <div className='login-card'>            
+                <form style={{ width: '100%'}} onSubmit={handleSubmit}>
+                    <input
+                        className='input-form'
+                        type="text"
+                        placeholder="Usuario"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <br/>
+                    <input
+                        className='input-form'
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <br/>
+                    <input
+                        className='input-form'
+                        type="password"
+                        placeholder="Contraseña"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <br/>
+                    {error && <p className='error-message'>{error}</p>}
+                    <button className='btn-form' type="submit">Registrarse</button>
+                </form>
+                <p>¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link></p>
+            </div>
         </div>
     );
 }

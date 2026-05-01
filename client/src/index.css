@@ -34,7 +34,7 @@
   :root {
     --text: #9ca3af;
     --text-h: #f3f4f6;
-    --bg: #16171d;
+    --bg: #141414;
     --border: #2e303a;
     --code-bg: #1f2028;
     --accent: #c084fc;
@@ -109,3 +109,41 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+.input-form {
+  width: 100%;
+  margin-bottom: 4px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.362);
+  -webkit-text-fill-color: rgb(146, 146, 146);
+  border: 0px solid black;
+  height: 25px;
+  box-sizing: border-box;
+}
+
+.btn-form {
+  margin: 4px;
+  width: 200px;
+  height: 25px;
+}
+
+.error-message {
+  color: rgb(206, 25, 25);
+  font-family: 'arial';
+  font-size: small;
+}
+
+.login-card {
+    background-color: rgb(37, 37, 38);
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 20px;
+    width: 400px;
+    height: 200px;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;       
+}
+

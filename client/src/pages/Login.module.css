@@ -1,0 +1,14 @@
+.login-card {
+    background-color: rgb(37, 37, 38);
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 20px;
+    width: 400px;
+    height: 200px;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;       
+}
+
