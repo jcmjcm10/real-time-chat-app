@@ -21,11 +21,12 @@ module.exports = (io) => {
     });
 
     io.on('connection', (socket) => {
-        console.log('Usuario conectado:', socket.id);
+        const rooms = new Set();
 
         socket.on('join_room', async (roomId) => {
             socket.join(roomId);
-            
+            rooms.add(roomId);
+
             const redis = getRedis();
             await redis.sadd(`room:${roomId}:online`, socket.user);
             
@@ -35,7 +36,8 @@ module.exports = (io) => {
 
         socket.on('leave_room', async (roomId) => {
             socket.leave(roomId);
-            
+            rooms.delete(roomId);
+
             const redis = getRedis();
             await redis.srem(`room:${roomId}:online`, socket.user);
             
@@ -56,10 +58,11 @@ module.exports = (io) => {
 
         socket.on('disconnect', async () => {
             const redis = getRedis();
-            for (const roomId of socket.rooms) {
+            for (const roomId of rooms) {
                 await redis.srem(`room:${roomId}:online`, socket.user);
                 const online = await redis.smembers(`room:${roomId}:online`);
                 io.to(roomId).emit('users_online', online);
+                console.log("online:", online);
             }
         });
     });
