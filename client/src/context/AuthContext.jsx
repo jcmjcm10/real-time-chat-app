@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import api from '../api/axios';
 
 const AuthContext = createContext();
@@ -24,8 +25,10 @@ export function AuthProvider({ children }) {
         setToken(null);
     };
 
+    const userId = token ? jwtDecode(token).userId : null;
+
     return (
-        <AuthContext.Provider value={{ token, login, register, logout }}>
+        <AuthContext.Provider value={{ token, userId, login, register, logout }}>
             {children}
         </AuthContext.Provider>
     );
