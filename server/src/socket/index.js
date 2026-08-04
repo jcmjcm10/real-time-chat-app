@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { getRedis } = require('../config/redis');
 const Message = require('../models/Message');
+const User = require('../models/User');
 
 
 module.exports = (io) => {
@@ -14,7 +15,12 @@ module.exports = (io) => {
 
             const payload = jwt.verify(token, process.env.JWT_SECRET);
             socket.user = payload["userId"]
-            next()            
+
+            const user = await User.findById(socket.user).select('username');
+            if (!user) return next(new Error('Unautorized'));
+            socket.username = user.username;
+
+            next()
         } catch (error) {
             return next(new Error('Unautorized'));
         }
@@ -53,7 +59,7 @@ module.exports = (io) => {
         });
 
         socket.on('typing', (roomId) => {
-            socket.to(roomId).emit('typing', socket.user)
+            socket.to(roomId).emit('typing', socket.username)
         });
 
         socket.on('disconnect', async () => {

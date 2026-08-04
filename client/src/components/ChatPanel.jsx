@@ -30,8 +30,8 @@ export default function ChatPanel({ room, socket }) {
             setUsersOnline(users);
         });
 
-        socket.on('typing', (userId) => {
-            setTyping(userId);
+        socket.on('typing', (username) => {
+            setTyping(username);
             setTimeout(() => setTyping(null), 2000);
         });
 
