@@ -1,6 +1,6 @@
 # Real-time Chat App
 
-Aplicación de chat en tiempo real construida como proyecto de demostración para portfolio/CV. El objetivo es mostrar una arquitectura full-stack completa: WebSockets, autenticación con JWT, MongoDB, Redis y un entorno dockerizado.
+Aplicación de chat en tiempo real con salas, presencia y mensajería por WebSocket. Node.js + Socket.io en el backend, React en el frontend, MongoDB y Redis, todo dockerizado.
 
 Es un proyecto demo. No está pensado para producción, sino para enseñar cómo encajan estas piezas en una aplicación real.
 
