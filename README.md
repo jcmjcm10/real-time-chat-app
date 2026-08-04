@@ -1,5 +1,11 @@
 # Real-time Chat App
 
+
+
+https://github.com/user-attachments/assets/5281ebc5-7963-4c70-8b4c-56b048d14506
+
+
+
 Aplicación de chat en tiempo real con salas, presencia y mensajería por WebSocket. Node.js + Socket.io en el backend, React en el frontend, MongoDB y Redis, todo dockerizado.
 
 Es un proyecto demo. No está pensado para producción, sino para enseñar cómo encajan estas piezas en una aplicación real.
